@@ -27,4 +27,64 @@ export const TOKEN_ICO_Provider = ({children}) => {
 
     const notifySuccess = (msg) => toast.success(msg, {duration:2000}) 
     const notifyError = (msg) => toast.error(msg, {duration:2000}) 
+
+
+    const TOKEN_ICO = async ()=> {
+        try {
+             
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    const BUT_ICO = async ()=> {
+        try {
+             
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    const TOKEN_WITHDRAW = async ()=> {
+        try {
+             
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    const UPDATE_TOKEN = async ()=> {
+        try {
+             
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    const UPDATE_TOKEN_PRICE = async ()=> {
+        try {
+             
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    const DONATE = async ()=> {
+        try {
+             
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    const TRANSFER_ETHER = async ()=> {
+        try {
+             
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    const TRANSFER_TOKEN = async ()=> {
+        try {
+             
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
 }
