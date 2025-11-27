@@ -233,7 +233,7 @@ export const ERC20_CONTRACT = async (CONTRACT_ADDRESS) => {
 };
 
 
-export const GET_BALANCE = async (CONTRACT_ADDRESS) => {
+export const GET_BALANCE = async () => {
   try {
     const web3Modal = new Web3Modal;
     const connection = await web3Modal.connect();
@@ -241,6 +241,20 @@ export const GET_BALANCE = async (CONTRACT_ADDRESS) => {
     const signer = provider.getSigner();
 
     const maticBal = await signer.getBalance()
+    return ethers.utils.formatEther(maticBal.toString())
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+export const CHECK_ACCOUNT_BALANCE = async (ADDRESS) => {
+  try {
+    const web3Modal = new Web3Modal;
+    const connection = await web3Modal.connect();
+    const provider = new ethers.providers.Web3Provider(connection);
+
+    const maticBal = await provider.getBalance(ADDRESS)
     return ethers.utils.formatEther(maticBal.toString())
   } catch (error) {
     console.log(error);
