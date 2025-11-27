@@ -218,6 +218,36 @@ export const ERC20 = async () => {
 };
 
 
+export const ERC20_CONTRACT = async (CONTRACT_ADDRESS) => {
+  try {
+    const web3Modal = new Web3Modal;
+    const connection = await web3Modal.connect();
+    const provider = new ethers.providers.Web3Provider(connection);
+    const signer = provider.getSigner();
+
+    const contract = fetchContract(CONTRACT_ADDRESS, ERC20_ABI, signer);
+    return contract;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+export const GET_BALANCE = async (CONTRACT_ADDRESS) => {
+  try {
+    const web3Modal = new Web3Modal;
+    const connection = await web3Modal.connect();
+    const provider = new ethers.providers.Web3Provider(connection);
+    const signer = provider.getSigner();
+
+    const maticBal = await signer.getBalance()
+    return ethers.utils.formatEther(maticBal.toString())
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
 
 const tokenImage =
   "https://www.daulathussain.com/wp-content/uploads/2024/05/theblockchaincoders.jpg";
