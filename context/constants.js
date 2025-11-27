@@ -10,7 +10,7 @@ export const ERC20_ABI = "";
 export const OWNER_ADDRESS = "";
 
 export const CONTRACT_ADDRESS = "";
-export const CONTRACT_ABI = tokenICO.abi;
+export const CONTRACT_ABI = ""
 
 const networks = {
   sepolia: {
@@ -260,6 +260,45 @@ export const CHECK_ACCOUNT_BALANCE = async (ADDRESS) => {
     console.log(error);
   }
 };
+
+export const addTokenToMetamask = async () => {
+  if(window.ethereum){
+    const tokenDetails = await ERC20(TOKEN_ADDRESS);
+
+    const tokenDecimals = tokenDetails?.decimals;
+    const tokenAddress = TOKEN_ADDRESS;
+    const tokenSymbol = tokenDetails?.symbol;
+    const tokenImage = "https://www.daulathussain.com/wp-content/uploads/2024/05/theblockchaincoders.jpg";
+
+    try {
+
+      const wasAdded = await window.ethereum.request({
+        method:"wallet_watchAssets",
+        params:{
+          type:"ERC20",
+          options:{
+            address:tokenAddress,
+            symbol: tokenSymbol,
+            decimals: tokenDecimals,
+            image: tokenImage
+          }
+        },
+      })
+
+      if(wasAdded) {
+        return"Token added"
+      } else {
+        return "Token not added!"
+      }
+      
+    } catch (error) {
+      return "failed to add"
+    }
+    
+  } else{
+    return "Metamask is not installed"
+  }
+}
 
 
 
