@@ -31,20 +31,96 @@ export const TOKEN_ICO_Provider = ({children}) => {
 
     const TOKEN_ICO = async ()=> {
         try {
+
+            const address = await CHECK_WALLET_CONNECTED();
+            if(address){
+                setLoader(true);
+                setAccount(address);
+                const contract = await TOKEN_ICO_CONTRACT();
+
+                const tokenDetails = await contract.getTokenDetails();
+                const contractOwner = await contract.owner();
+                const soldToken = await contract.soldTokens();
+
+                const ethBal = await GET_BALANCE();
+
+                const token = {
+                    tokenBal: ethers.utils.formatEther(tokenDetails.balance.toString()),
+                    name: tokenDetails.name,
+                    symbol:  tokenDetails.symbol,
+                    supply: ethers.utils.formatEther(tokenDetails.supply.toString()),
+                    tokenPrice: ethers.utils.formatEther(tokenDetails.tokenSalePrice.toString()),
+                    tokenAddr: tokenDetails.tokenAddr,
+                    maticBal: ethBal,
+                    address: address.toLowerCase(),
+                    owner: contractOwner.toLowerCase(),
+                    soldTokens: soldToken.toNumber(),
+                }
+                setLoader(false);
+                return token;
+            }
              
         } catch (error) {
             console.log(error)
         }
     }
-    const BUT_ICO = async ()=> {
+    const BUY_ICO = async (amount)=> {
         try {
+            setLoader(true);
+            const address = await CHECK_WALLET_CONNECTED();
+            if(address){
+                
+                const contract = await TOKEN_ICO_CONTRACT();
+                const tokenDetails = await contract.getTokenDetails();
+
+                const availableToken = ethers.utils.formatEther(tokenDetails.balance.toString());
+
+                if(availableToken > 1) {
+                    const price = ethers.utils.formatEther(
+                        tokenDetails.tokenPrice.toString()
+                    );
+                    const payAmount = ethers.utils.parseUnits(price.toString(), "ether");
+                    const transaction = await contract.buyToken(Number(amount), {
+                        value:payAmount.toString(),
+                        gasLimit: ethers.utils.hexlify(8000000)
+                    })
+
+                    await transaction.wait();
+                    setLoader(false);
+                    notifySuccess("Transaction Completed Succeessfully");
+                    window.location.reload();
+                }
+
+                
+                
+                return token;
+            }
              
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            notifyError("error try agai later");
+            setLoader(false);
         }
     }
     const TOKEN_WITHDRAW = async ()=> {
         try {
+
+            setLoader(true);
+            const address = await CHECK_WALLET_CONNECTED();
+            if(address){
+                const contract = await TOKEN_ICO_CONTRACT();
+                const tokenDetails = await contract.getTokenDetails();
+
+                const availableToken = ethers.utils.formatEther(tokenDetails.balance.toString());
+                if(availableToken > 1) {
+                    const transaction = await contract.withdrawAllTokens()
+
+                    await transaction.wait();
+                    setLoader(false);
+                    notifySuccess("Transaction Completed Succeessfully");
+                    window.location.reload();
+                }
+            }
              
         } catch (error) {
             console.log(error)
