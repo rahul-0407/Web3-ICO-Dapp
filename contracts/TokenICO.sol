@@ -15,7 +15,7 @@ interface ERC20 {
 contract TokenICO {
     address public owner;
     address public tokenAddress;
-    address public tokenSalePrice;
+    uint256 public tokenSalePrice;
     uint256 public soldTokens;
 
 
@@ -37,7 +37,7 @@ contract TokenICO {
     }
 
     function multiply(uint256 x, uint256 y) internal pure returns(uint256 z) {
-        require(y == 0 || (z = x * Y) / y == x);
+        require(y == 0 || (z = x * y) / y == x);
     }
 
     function buyToken(uint256 _tokenAmount) public payable {
@@ -56,14 +56,14 @@ contract TokenICO {
     function getTokenDetails() public view returns(string memory name, string memory symbol, uint256 balance, uint256 supply, uint256 tokenPrice, address tokenAddr) {
         ERC20 token = ERC20(tokenAddress);
 
-        return{
+        return (
             token.name(),
             token.symbol(),
             token.balanceOf(address(this)),
             token.totalSupply(),
             tokenSalePrice,
             tokenAddress
-        }
+        );
     }
 
 
@@ -71,14 +71,14 @@ contract TokenICO {
         require(msg.value >= _amount, "Insufficient funds sent");
 
         (bool success, ) = owner.call{value: _amount}("");
-        require(suucess, "Transaction Failed"); 
+        require(success, "Transaction Failed"); 
     }
 
     function transferToken(address payable _reciever, uint256 _amount) external payable {
         require(msg.value >= _amount, "Insufficient funds sent");
 
         (bool success, ) = _reciever.call{value: _amount}("");
-        require(suucess, "Transaction Failed"); 
+        require(success, "Transaction Failed"); 
     }
 
     function withdrawAllTokens() public onlyOwner {
@@ -87,7 +87,7 @@ contract TokenICO {
 
         require(balance > 0, "No token to withdraw");
 
-        require(token.transfer(owner, balance), "Transfer Failed")
+        require(token.transfer(owner, balance), "Transfer Failed");
         
     }
 
