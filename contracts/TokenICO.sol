@@ -74,7 +74,7 @@ contract TokenICO {
         require(success, "Transaction Failed"); 
     }
 
-    function transferToken(address payable _reciever, uint256 _amount) external payable {
+    function transferEther(address payable _reciever, uint256 _amount) external payable {
         require(msg.value >= _amount, "Insufficient funds sent");
 
         (bool success, ) = _reciever.call{value: _amount}("");

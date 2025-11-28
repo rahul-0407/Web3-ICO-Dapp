@@ -21,7 +21,7 @@ const networks = {
       symbol: "SepoliaETH",
       decimals: 18,
     },
-    rpcUrls: ["https://sepolia.infura.io/v3/"],
+    rpcUrls: [`https://sepolia.infura.io/v3/${INFURA_KEY}`],
     blockExplorerUrls: ["https://sepolia.etherscan.io"],
   },
   holesky: {
