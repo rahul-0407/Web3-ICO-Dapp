@@ -4,13 +4,13 @@ import Web3Modal from "web3modal";
 import tokenICO from "./TokenICO.json";
 import erc20 from "./ERC20.json";
 
-export const TOKEN_ADDRESS = "";
-export const ERC20_ABI = "";
+export const TOKEN_ADDRESS = process.env.NEXT_PUBLIC_TOKEN_ADDRESS;
+export const ERC20_ABI = erc20.abi;
 
-export const OWNER_ADDRESS = "";
+export const OWNER_ADDRESS = "0xF8C85DddaAfE76E46593Cc565011716A31192B97";
 
-export const CONTRACT_ADDRESS = "";
-export const CONTRACT_ABI = ""
+export const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;
+export const CONTRACT_ABI = tokenICO.abi;
 
 const networks = {
   sepolia: {
@@ -21,7 +21,7 @@ const networks = {
       symbol: "SepoliaETH",
       decimals: 18,
     },
-    rpcUrls: [`https://sepolia.infura.io/v3/${INFURA_KEY}`],
+    rpcUrls: [`https://sepolia.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_KEY}`],
     blockExplorerUrls: ["https://sepolia.etherscan.io"],
   },
   holesky: {
