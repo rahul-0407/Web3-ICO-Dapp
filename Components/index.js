@@ -1,15 +1,49 @@
-import Footer from "./Footer"
-import About from "./Header"
-import About from "./About"
-import About from "./Brand"
-import About from "./Contact"
-import About from "./Faq"
-import About from "./Features"
-import About from "./Hero"
-import About from "./Loader"
-import About from "./Progress"
-import About from "./SideBar"
-import About from "./Team"
-import About from "./Token"
-import About from "./TokenInfo"
-import About from "./Roadmap"
+import Footer from "./Footer";
+import Header from "./Header";
+import About from "./About";
+import Brand from "./Brand";
+import Contact from "./Contact";
+import Faq from "./Faq";
+import Features from "./Features";
+import Hero from "./Hero";
+import Loader from "./Loader";
+import Progress from "./Progress";
+import SideBar from "./SideBar";
+import Team from "./Team";
+import Token from "./Token";
+import TokenInfo from "./TokenInfo";
+import Roadmap from "./Roadmap";
+
+//MODEL
+import Popup from "./Popup";
+import TransferToken from "./TransferToken";
+import Owner from "./Owner";
+import TransferCurrency from "./TransferCurrency";
+import Donate from "./Donate";
+import UpdateAddress from "./UpdateAddress";
+import UpdatePrice from "./UpdatePrice";
+
+export {
+  Footer,
+  Header,
+  About,
+  Brand,
+  Contact,
+  Faq,
+  Features,
+  Hero,
+  Loader,
+  Progress,
+  SideBar,
+  Team,
+  Token,
+  TokenInfo,
+  Roadmap,
+  Popup,
+  TransferToken,
+  Owner,
+  TransferCurrency,
+  Donate,
+  UpdateAddress,
+  UpdatePrice,
+};
