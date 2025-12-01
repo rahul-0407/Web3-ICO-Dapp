@@ -41,7 +41,57 @@ const Hero = ({setBuyModel, account, CONNECT_WALLET, setAccount, setLoader, deta
   }
 
 
-  return <section className="hero hero__ico pos-rel">Hero</section>;
+  return <section className="hero hero__ico pos-rel">
+    <div className="hero__bg" data-background="assets/img/bg/hero_bg.png" />
+
+    <div className="container">
+      <div className="row">
+        <div className="col-lg-7">
+          <div className="hero__content">
+            <h1 className="title mb-45">
+              Participate in the <span>Ongoing ICO Token</span> Sale
+            </h1>
+
+            <div className="btns">
+              {
+                account? (
+                  <a className="thm-btn" onClick={()=> setBuyModel(true)}>PURCHASE TOKEN</a>
+                ) : (
+                  <a className="thm-btn" onClick={()=> connectWallet()}>Connect Wallet</a>
+                )
+              }
+
+              <a className="thm-btn thm-btn--dark" onClick={()=> connectWallet()}>Add Metamask</a>
+
+            </div>
+
+            <div className="hero__progress mt-50">
+              <div className="progress-title ul_li_between">
+                <span><span>Raised -</span> {detail?.soldTokens} Tokens</span>
+                <span><span>Total ICO -</span> {detail?.soldTokens + Number(detail?.tokenBal)} {detail?.symbol}</span>
+              </div>
+
+              <div className="progress">
+                <div className="progress-bar" role="progressbar" style={{width:`${percentage}`}}/>
+              </div>
+
+              <ul className="ul_li_between">
+                <li>Pre Sell</li>
+                <li>Soft Cap</li>
+                <li>Bonus</li>
+              </ul>
+
+            </div>
+
+          </div>
+        </div>
+
+        <div className="col-lg-5"></div>
+
+
+      </div>
+    </div>
+  </section>;
 };
 
 export default Hero;
