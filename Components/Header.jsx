@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState, useEffect} from "react";
 
 const Header = ({
   account,
@@ -41,6 +41,7 @@ const Header = ({
           method: "eth_requestAccounts",
         });
         setAccount(accounts[0]);
+        
       } catch (error) {
         console.log(error);
       }
@@ -53,7 +54,7 @@ const Header = ({
     <header className="site-header header--transparent ico-header ">
       <div className="header__main-wrap">
         <div className="container mxw_1640">
-          <div className="header__main ul_ui_between">
+          <div className="header__main ul_li_between">
             <div className="header_left ul_ui">
               <div className="header__logo">
                 <a href="/">

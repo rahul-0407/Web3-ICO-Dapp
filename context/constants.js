@@ -17,8 +17,8 @@ const networks = {
     chainId: `0x${Number(11155111).toString(16)}`,
     chainName: "Sepolia",
     nativeCurrency: {
-      name: "SepoliaETH",
-      symbol: "SepoliaETH",
+      name: "Ethereum",
+      symbol: "ETH",
       decimals: 18,
     },
     rpcUrls: [`https://sepolia.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_KEY}`],
@@ -116,23 +116,33 @@ const networks = {
 
 const changeNetwork = async ({ networkName }) => {
   try {
-    if (!window.ethereum) throw new Error("No crypto wallet found");
+    const chainId = networks[networkName].chainId;
+
     await window.ethereum.request({
-      method: "wallet_addEthereumChain",
-      params: [
-        {
-          ...networks[networkName],
-        },
-      ],
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId }],
     });
-  } catch (error) {
-    console.log(error);
+
+  } catch (switchError) {
+    // ERROR: chain is not added → ADD it
+    if (switchError.code === 4902) {
+      try {
+        await window.ethereum.request({
+          method: "wallet_addEthereumChain",
+          params: [networks[networkName]],
+        });
+      } catch (addError) {
+        console.log("Error adding chain:", addError);
+      }
+    } else {
+      console.log("Network switch error:", switchError);
+    }
   }
 };
 
+
 export const handleNetworkSwitch = async () => {
-  const networkName = "sepolia";
-  await changeNetwork(networkName);
+  return await changeNetwork({ networkName: "sepolia" });
 };
 
 export const CHECK_WALLET_CONNECTED = async () => {

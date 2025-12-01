@@ -42,13 +42,14 @@ export const TOKEN_ICO_Provider = ({ children }) => {
 
         const ethBal = await GET_BALANCE();
 
+
         const token = {
           tokenBal: ethers.utils.formatEther(tokenDetails.balance.toString()),
           name: tokenDetails.name,
           symbol: tokenDetails.symbol,
           supply: ethers.utils.formatEther(tokenDetails.supply.toString()),
           tokenPrice: ethers.utils.formatEther(
-            tokenDetails.tokenSalePrice.toString()
+            tokenDetails.tokenPrice.toString()
           ),
           tokenAddr: tokenDetails.tokenAddr,
           maticBal: ethBal,
