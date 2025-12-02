@@ -8,6 +8,7 @@ import {
   TiSocialInstagram,
 } from "react-icons/ti";
 import { IoIosSend } from "react-icons/io";
+import { IoCloudDownload } from "react-icons/io5";
 
 const Footer = () => {
   return (
@@ -122,10 +123,38 @@ const Footer = () => {
               Copyright @ 2025 @therahul. All right reseved
             </div>
 
-            <ul className="footer__links ul_li"></ul>
+            <ul className="footer__links ul_li_right mt-15">
+              <li>
+                <a href="#">Privacy </a>
+              </li>
+              <li>
+                <a href="#">Cookies </a>
+              </li>
+              <li>
+                <a href="#">Terms </a>
+              </li>
+              <li>
+                <a href="#">About </a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
+
+      <div className="footer__icon-shape">
+        <div className="icon icon--1">
+          <div>
+            <img src="assets/img/shape/f_icon1.png" alt="" />
+          </div>
+        </div>
+        <div className="icon icon--2">
+          <div>
+            <img src="assets/img/shape/f_icon2.png" alt="" />
+          </div>
+        </div>
+      </div>
+
+
     </footer>
   );
 };
