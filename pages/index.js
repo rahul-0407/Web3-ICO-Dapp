@@ -51,7 +51,8 @@ const index = () => {
   
 
   return <>
-  <div className="body_wrap">{ownerModel && (<Owner setOwnerModel={setOwnerModel} currency={currency} detail={detail} account={account} setTransferModel={setTransferModel} setTransferCurrency={setTransferCurrency} setOpenDonate={setOpenDonate} TOKEN_WITHDRAW={TOKEN_WITHDRAW} setOpenUpdateAddress={setOpenUpdateAddress} setOpenUpdatePrice={setOpenUpdatePrice}/>)}
+  <div className="body_wrap">
+    {!ownerModel && (<Owner setOwnerModel={setOwnerModel} currency={currency} detail={detail} account={account} setTransferModel={setTransferModel} setTransferCurrency={setTransferCurrency} setOpenDonate={setOpenDonate} TOKEN_WITHDRAW={TOKEN_WITHDRAW} setOpenUpdateAddress={setOpenUpdateAddress} setOpenUpdatePrice={setOpenUpdatePrice}/>)}
 
   {
     buyModel && (<Popup setBuyModel={setBuyModel} BUY_TOKEN={BUY_TOKEN} currency={currency} detail={detail} account={account} ERC20={ERC20} TOKEN_ADDRESS={TOKEN_ADDRESS} setLoader={setLoader} />)
