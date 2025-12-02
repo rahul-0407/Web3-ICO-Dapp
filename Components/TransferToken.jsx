@@ -8,6 +8,8 @@ const TransferToken = () => {
     _tokenAddress:"",
   })
 
+  const [transferToken, setTransferToken] = useState()
+
   return <div>TransferToken</div>;
 };
 
