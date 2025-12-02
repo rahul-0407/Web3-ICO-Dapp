@@ -62,7 +62,7 @@ const index = () => {
     <TransferToken setTransferModel={setTransferModel} TRANSFER_TOKEN={TRANSFER_TOKEN} ERC20={ERC20} setLoader={setLoader} />
   )}
 
-  {transferCuurency && (
+  {!transferCuurency && (
     <TransferCurrency setTransferCurrency={setTransferCurrency} TRANSFER_ETHER={TRANSFER_ETHER} detail={detail} currency={currency} CHECK_ACCOUNT_BALANCE={CHECK_ACCOUNT_BALANCE} setLoader={setLoader} />
   )}
 

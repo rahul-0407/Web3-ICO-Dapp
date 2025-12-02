@@ -1,6 +1,13 @@
-import React from "react";
+import React,{useState, useEffect} from "react";
 
 const TransferToken = () => {
+
+  const [token, setToken] = useState({
+    _sendTo:"",
+    _amount:"",
+    _tokenAddress:"",
+  })
+
   return <div>TransferToken</div>;
 };
 
