@@ -1,79 +1,49 @@
 import React, { useState, useEffect } from "react";
-
+import { shortenAddress } from "../Utils";
 const Popup = ({setBuyModel, BUY_TOKEN, currency, detail, account, ERC20, TOKEN_ADDRESS, setLoader}) => {
-  const [token, setToken] = useState({
-    _sendTo: "",
-    _amount: "",
-    _tokenAddress: "",
-  });
-
-  const [tokenDetails, setTokenDetails] = useState();
+  const [amount, setAmount] = useState()
   const [transferToken, setTransferToken] = useState();
 
   useEffect(() => {
-    if (transferToken) {
-      const loadToken = async () => {
-        setLoader(true);
-        const token = await ERC20(transferToken);
-        if (token == undefined) {
-          console.log("Kindly paste the token address");
-        } else {
-          setTokenDetails(token);
-          console.log(token);
-        }
-        setLoader(false);
-      };
-      loadToken();
-    }
+    setLoader(true);
+    ERC20(TOKEN_ADDRESS).then((items)=>{
+      setTransferToken(items)
+      console.log(items)
+      setLoader(false)
+    })
   }, [transferToken]);
 
   return (
     <section className="new-margin ico-contact pos-rel">
       <div className="container">
         <div className="ico-contact__wrap">
-          <h2 className="title">Transfer Token{" "}
-            <strong onClick={() => setTransferModel(false)}>X</strong>
+          <h2 className="title">Buy Token{" "}
+            <strong onClick={() => setBuyModel(false)}>X</strong>
           </h2>
           <div>
           <div className="row">
-            <div className="col-lg-12">
-              {tokenDetails?.name ? (
-                <input
-                  type="text"
-                  value={`Name ${tokenDetails?.name} Balance: ${tokenDetails?.balance} ${tokenDetails?.symbol}`}
-                />
-              ) : (
-                <input
-                  type="text"
-                  placeholder="_tokenAddress"
-                  onChange={(e)=>(
-                    setToken({...tokenDetails,_tokenAddress:e.target.value}), setTransferToken(e.target.value)
-                  )}
-                />
-              )}
-            </div>
 
-            <div className="col-lg-12">
+            <div className="col-lg-6">
               <input
                   type="text"
-                  placeholder="_sendTo"
+                  placeholder={`Token Balance: ${transferToken?.balance} ${transferToken?.symbol}`}
                   onChange={(e)=>(
-                     setToken({...tokenDetails,_sendTo:e.target.value})
+                     setAmount(e.target.value)
                   )}
                 />
             </div>
-            <div className="col-lg-12">
+            <div className="col-lg-6">
               <input
                   type="text"
-                  placeholder="_amount"
-                  onChange={(e)=>(
-                     setToken({...tokenDetails,_amount:e.target.value})
-                  )}
+                  value={amount ? `${amount * detail?.tokenPrice} ${currency}` : "Output Value"}
                 />
+            </div>
+            <div className="col-lg-12">
+              <textarea disabled name="message" cols="30" rows="10" placeholder={`Current Price: ${detail?.tokenBal}${detail?.symbol} Token Address: ${detail?.tokenBal} ${shortenAddress(detail?.tokenAddr)}`}></textarea>
             </div>
 
             <div className="ico-contract__btn text-center mt-10">
-              <button onClick={()=> TRANSFER_TOKEN(token)} className="thm-btn">Transfer Token</button>
+              <button onClick={()=> BUY_TOKEN(amount)} className="thm-btn">Buy Token</button>
             </div>
 
 
