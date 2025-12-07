@@ -70,11 +70,11 @@ const index = () => {
     <Donate detail={detail} currency={currency} setOpenDonate={setOpenDonate} DONATE={DONATE} />
   )}
 
-  {!openUpdatePrice && (
+  {openUpdatePrice && (
     <UpdatePrice detail={detail} currency={currency} setOpenUpdatePrice={setOpenUpdatePrice} UPDATE_TOKEN_PRICE={UPDATE_TOKEN_PRICE} />
   )}
 
-  {openUpdateAddress && (
+  {!openUpdateAddress && (
     <UpdateAddress detail={detail} currency={currency} setOpenUpdateAddress={setOpenUpdateAddress} UPDATE_TOKEN={UPDATE_TOKEN} ERC20={ERC20} setLoader={setLoader} />
   )}
 
