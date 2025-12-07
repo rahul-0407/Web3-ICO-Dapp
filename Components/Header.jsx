@@ -120,7 +120,7 @@ const Header = ({
                 </a>
               </div>
               {account?
-              <div className="header_account">
+              <div className="header__account">
                 <a onClick={()=>  navigator.clipboard.writeText(detail?.address)}>{
                   shortenAddress(detail?.address)
                   }:{detail?.maticBal.slice(0,6)
