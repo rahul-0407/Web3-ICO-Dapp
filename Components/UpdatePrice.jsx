@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from "react";
 
 const UpdatePrice = ({ detail, currency, setOpenUpdatePrice, UPDATE_TOKEN_PRICE }) => {
-  const [donateFund, setDonateFund] = useState();
+  const [price, setPrice] = useState();
 
   return (
     <section className="new-margin ico-contact pos-rel">
       <div className="container">
         <div className="ico-contact__wrap">
           <h2 className="title">
-            Donate {currency}
-            <strong onClick={() => setOpenDonate(false)}>X</strong>
+            Update Token Price
+            <strong onClick={() => setOpenUpdatePrice(false)}>X</strong>
           </h2>
           <div>
             <div className="row">
               <div className="col-lg-12">
                 <input
                   type="text"
-                  placeholder="_amount"
+                  placeholder="_price"
                   onChange={(e) => (
-                    setDonateFund(e.target.value )
+                    setPrice(e.target.value )
                   )}
                 />
               </div>
@@ -26,15 +26,15 @@ const UpdatePrice = ({ detail, currency, setOpenUpdatePrice, UPDATE_TOKEN_PRICE 
               
 
               <p>
-                <strong>Balance:</strong>
-                {detail?.maticBal} {currency}
+                <strong>Current Price:</strong>
+                {detail?.tokenPrice} {currency} &nbsp; &nbsp; <strong>Token Balance:</strong> {detail?.tokenBal} {detail?.symbol}
               </p>
               <div className="ico-contract__btn text-center mt-10">
                 <button
-                  onClick={() => DONATE(donateFund)}
+                  onClick={() => UPDATE_TOKEN_PRICE(price)}
                   className="thm-btn"
                 >
-                  Donate
+                  Update Price
                 </button>
               </div>
             </div>
