@@ -36,7 +36,7 @@ const TransferToken = ({
     <section className="new-margin ico-contact pos-rel">
       <div className="container">
         <div className="ico-contact__wrap">
-          <h2 className="title">Transfer Token
+          <h2 className="title">Transfer Token{" "}
             <strong onClick={() => setTransferModel(false)}>X</strong>
           </h2>
           <div>

@@ -1,58 +1,54 @@
 import React, { useState, useEffect } from "react";
 
 const TransferCurrency = ({
-  setTransferModel,
-  TRANSFER_TOKEN,
-  ERC20,
-  setLoader,
+  setTransferCurrency, TRANSFER_ETHER, detail, currency, CHECK_ACCOUNT_BALANCE, setLoader
 }) => {
-  const [token, setToken] = useState({
-    _sendTo: "",
+  const [transfer, setTransfer] = useState({
     _amount: "",
-    _tokenAddress: "",
+    _receiver: "",
   });
 
-  const [tokenDetails, setTokenDetails] = useState();
-  const [transferToken, setTransferToken] = useState();
+  const [receiver, setReceiver] = useState()
+  const [address, setAddress] = useState()
 
   useEffect(() => {
-    if (transferToken) {
+    if (address) {
       const loadToken = async () => {
         setLoader(true);
-        const token = await ERC20(transferToken);
-        if (token == undefined) {
+        const balance = await CHECK_ACCOUNT_BALANCE(address);
+        if (balance == undefined) {
           console.log("Kindly paste the token address");
         } else {
-          setTokenDetails(token);
-          console.log(token);
+          setTokenDetails(balance);
+          console.log(balance);
         }
         setLoader(false);
       };
       loadToken();
     }
-  }, [transferToken]);
+  }, [address]);
 
   return (
     <section className="new-margin ico-contact pos-rel">
       <div className="container">
         <div className="ico-contact__wrap">
-          <h2 className="title">Transfer Token
-            <strong onClick={() => setTransferModel(false)}>X</strong>
+          <h2 className="title">Transfer {currency}
+            <strong onClick={() => setTransferCurrency(false)}>X</strong>
           </h2>
           <div>
           <div className="row">
             <div className="col-lg-12">
-              {tokenDetails?.name ? (
+              {receiver ? (
                 <input
                   type="text"
-                  value={`Name ${tokenDetails?.name} Balance: ${tokenDetails?.balance} ${tokenDetails?.symbol}`}
+                  value={`Account Balance ${receiver.slice(0,8)} ${currency}`}
                 />
               ) : (
                 <input
                   type="text"
-                  placeholder="_tokenAddress"
+                  placeholder="_receiver"
                   onChange={(e)=>(
-                    setToken({...tokenDetails,_tokenAddress:e.target.value}), setTransferToken(e.target.value)
+                    setToken({...tokenDetails,_receiver:e.target.value}), setAddress(e.target.value)
                   )}
                 />
               )}
@@ -63,22 +59,14 @@ const TransferCurrency = ({
                   type="text"
                   placeholder="_sendTo"
                   onChange={(e)=>(
-                     setToken({...tokenDetails,_sendTo:e.target.value})
-                  )}
-                />
-            </div>
-            <div className="col-lg-12">
-              <input
-                  type="text"
-                  placeholder="_amount"
-                  onChange={(e)=>(
-                     setToken({...tokenDetails,_amount:e.target.value})
+                     setTransfer({...transfer,_amount:e.target.value})
                   )}
                 />
             </div>
 
+            <p><strong>Balance:</strong>{detail?.maticBal} {currency}</p>
             <div className="ico-contract__btn text-center mt-10">
-              <button onClick={()=> TRANSFER_TOKEN(token)} className="thm-btn">Transfer Token</button>
+              <button onClick={()=> TRANSFER_ETHER(transfer)} className="thm-btn">Transfer Currency</button>
             </div>
 
 
