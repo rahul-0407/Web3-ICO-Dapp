@@ -16,7 +16,7 @@ const Donate = ({ detail, currency, setOpenDonate, DONATE }) => {
               <div className="col-lg-12">
                 <input
                   type="text"
-                  placeholder="_receiver"
+                  placeholder="_amount"
                   onChange={(e) => (
                     setDonateFund(e.target.value )
                   )}
