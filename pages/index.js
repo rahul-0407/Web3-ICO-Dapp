@@ -66,7 +66,7 @@ const index = () => {
     <TransferCurrency setTransferCurrency={setTransferCurrency} TRANSFER_ETHER={TRANSFER_ETHER} detail={detail} currency={currency} CHECK_ACCOUNT_BALANCE={CHECK_ACCOUNT_BALANCE} setLoader={setLoader} />
   )}
 
-  {openDonate && (
+  {!openDonate && (
     <Donate detail={detail} currency={currency} setOpenDonate={setOpenDonate} DONATE={DONATE} />
   )}
 
