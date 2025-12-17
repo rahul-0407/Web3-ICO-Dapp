@@ -4,13 +4,16 @@
   "private": true,
   "scripts": {
     "dev": " next dev",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@formspree/react": "^2.5.1",
     "@next/font": "14.0.3",
+    "@rainbow-me/rainbowkit": "^2.2.10",
+    "@tanstack/react-query": "^5.90.12",
+    "axios": "^0.27.2",
     "dotenv": "^16.0.0",
     "ethers": "^5.6.4",
     "next": "14.0.3",
@@ -18,7 +21,8 @@
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.11.0",
-    "web3modal": "^1.9.5",
-    "axios": "^0.27.2"
+    "viem": "^2.43.1",
+    "wagmi": "^2.19.5",
+    "web3modal": "^1.9.5"
   }
 }

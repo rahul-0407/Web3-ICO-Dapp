@@ -11,7 +11,7 @@ const Popup = ({setBuyModel, BUY_TOKEN, currency, detail, account, ERC20, TOKEN_
       console.log(items)
       setLoader(false)
     })
-  }, [transferToken]);
+  }, []);
 
   return (
     <section className="new-margin ico-contact pos-rel">

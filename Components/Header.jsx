@@ -1,4 +1,5 @@
 import React,{useState, useEffect} from "react";
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const Header = ({
   account,
@@ -128,7 +129,7 @@ const Header = ({
               </div>
               :
               <div className="header__account">
-                <a onClick={()=>connectMetamask()}>Connect Wallet</a>
+                <ConnectButton />
               </div>
               }
             </div>

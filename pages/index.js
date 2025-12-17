@@ -82,7 +82,7 @@ const index = () => {
 
   <Header account={account} setAccount={setAccount} CONNECT_WALLET={CONNECT_WALLET} setLoader={setLoader} setOwnerModel={setOwnerModel} shortenAddress={shortenAddress} detail={detail} currency={currency} ownerModel={ownerModel} />
 
-  <SideBar/>
+  <SideBar setOwnerModel={setOwnerModel} ownerModel={ownerModel} />
   <Hero setBuyModel={setBuyModel} account={account} CONNECT_WALLET={CONNECT_WALLET} setAccount={setAccount} setLoader={setLoader} detail={detail} addTokenToMetamask={addTokenToMetamask} />
 
   <About/>

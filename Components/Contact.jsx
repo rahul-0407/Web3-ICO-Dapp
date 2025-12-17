@@ -6,7 +6,7 @@ const Contact = () => {
   const notifySuccess = (msg) => toast.success(msg, { duration: 2000 });
   const notifyError = (msg) => toast.error(msg, { duration: 2000 });
 
-  const [state, handleSubmit] = useForm("dfghj")
+  const [state, handleSubmit] = useForm("mwveepyg")
 
   if(state.succeeded){
     notifySuccess("successfully submitted");

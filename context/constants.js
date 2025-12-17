@@ -191,41 +191,49 @@ export const TOKEN_ICO_CONTRACT = async () => {
 };
 
 
-export const ERC20 = async () => {
+export const ERC20 = async (tokenAddress) => {
   try {
-    const web3Modal = new Web3Modal;
+    if (!tokenAddress) return null;
+
+    const web3Modal = new Web3Modal();
     const connection = await web3Modal.connect();
     const provider = new ethers.providers.Web3Provider(connection);
-
-    const network = provider.getNetwork();
     const signer = provider.getSigner();
 
-    const userAddress = signer.getAddress();
-    const balance = await contract.balanceOf(userAddress);
+    const network = await provider.getNetwork();
+    const userAddress = await signer.getAddress();
+
+    // ✅ CREATE CONTRACT (THIS WAS MISSING)
+    const contract = new ethers.Contract(
+      tokenAddress,
+      ERC20_ABI,
+      signer
+    );
 
     const name = await contract.name();
     const symbol = await contract.symbol();
-    const supply = await contract.totalSupply();
     const decimals = await contract.decimals();
-    const address = await contract.address; 
+    const totalSupply = await contract.totalSupply();
+    const balance = await contract.balanceOf(userAddress);
 
     const token = {
-      address: address,
-      name: name,
-      symbol: symbol,
-      decimals: decimals,
-      supply: ethers.utils.formatEther(supply.toString()),
-      supply: ethers.utils.formatEther(balance.toString()),
+      address: tokenAddress,
+      name,
+      symbol,
+      decimals,
+      totalSupply: ethers.utils.formatUnits(totalSupply, decimals),
+      balance: ethers.utils.formatUnits(balance, decimals),
       chainId: network.chainId,
-    }
+    };
 
-
-    console.log(token)
+    console.log("ERC20 token:", token);
     return token;
   } catch (error) {
-    console.log(error);
+    console.log("ERC20 error:", error);
+    return null;
   }
 };
+
 
 
 export const ERC20_CONTRACT = async (CONTRACT_ADDRESS) => {
@@ -283,7 +291,7 @@ export const addTokenToMetamask = async () => {
     try {
 
       const wasAdded = await window.ethereum.request({
-        method:"wallet_watchAssets",
+        method: "wallet_watchAsset",
         params:{
           type:"ERC20",
           options:{

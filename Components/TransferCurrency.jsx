@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { ethers } from "ethers";
 
 const TransferCurrency = ({
   setTransferCurrency, TRANSFER_ETHER, detail, currency, CHECK_ACCOUNT_BALANCE, setLoader
@@ -12,21 +13,25 @@ const TransferCurrency = ({
   const [address, setAddress] = useState()
 
   useEffect(() => {
-    if (address) {
-      const loadToken = async () => {
-        setLoader(true);
-        const balance = await CHECK_ACCOUNT_BALANCE(address);
-        if (balance == undefined) {
-          console.log("Kindly paste the token address");
-        } else {
-          setTokenDetails(balance);
-          console.log(balance);
-        }
-        setLoader(false);
-      };
-      loadToken();
+  if (!address || !ethers.utils.isAddress(address)) {
+    setReceiver(null);
+    return;
+  }
+
+  const loadBalance = async () => {
+    setLoader(true);
+    try {
+      const balance = await CHECK_ACCOUNT_BALANCE(address);
+      setReceiver(balance);
+    } catch (err) {
+      console.log("Invalid address");
     }
-  }, [address]);
+    setLoader(false);
+  };
+
+  loadBalance();
+}, [address]);
+
 
   return (
     <section className="new-margin ico-contact pos-rel">
@@ -38,26 +43,28 @@ const TransferCurrency = ({
           <div>
           <div className="row">
             <div className="col-lg-12">
-              {receiver ? (
-                <input
-                  type="text"
-                  value={`Account Balance ${receiver.slice(0,8)} ${currency}`}
-                />
-              ) : (
-                <input
-                  type="text"
-                  placeholder="_receiver"
-                  onChange={(e)=>(
-                    setToken({...tokenDetails,_receiver:e.target.value}), setAddress(e.target.value)
-                  )}
-                />
-              )}
+              <input
+  type="text"
+  placeholder="_receiver"
+  value={
+    receiver
+      ? `Account Balance ${receiver.slice(0, 8)} ${currency}`
+      : transfer._receiver
+  }
+  onChange={(e) => {
+    setTransfer({ ...transfer, _receiver: e.target.value });
+    setAddress(e.target.value);
+    setReceiver(null); // reset when typing again
+  }}
+  readOnly={!!receiver}
+/>
+
             </div>
 
             <div className="col-lg-12">
               <input
                   type="text"
-                  placeholder="_sendTo"
+                  placeholder="_amount"
                   onChange={(e)=>(
                      setTransfer({...transfer,_amount:e.target.value})
                   )}
