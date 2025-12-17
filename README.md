@@ -110,7 +110,7 @@ ico-presale-dapp/
 
 ## 📌 Future Enhancements
 
-- Mainnet deployment  
+- Mainnet deployment (polygon coming very soon)
 - KYC integration  
 - Vesting mechanism  
 - Multi-chain support  
