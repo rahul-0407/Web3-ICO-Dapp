@@ -18,7 +18,7 @@
 </p>
 
 <p align="center">
-  🔗 <a href="https://ico3-dapp.netlify.app/">Live Demo</a> •
+  🔗 <a href="https://ico3-dapp.netlify.app/" target="_blank">Live Demo</a> •
   🌐 Sepolia Testnet •
   🧠 Smart Contract Powered
 </p>
